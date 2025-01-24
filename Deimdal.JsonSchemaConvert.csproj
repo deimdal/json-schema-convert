@@ -1,0 +1,28 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <OutputType>Exe</OutputType>
+        <TargetFramework>net8.0</TargetFramework>
+        <Nullable>enable</Nullable>
+        <Version>1.0.2</Version>
+        <AssemblyName>Deimdal.JsonSchemaConvert</AssemblyName>
+        <RootNamespace>Deimdal.JsonSchemaConvert</RootNamespace>
+        <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+
+        <PackAsTool>true</PackAsTool>
+        <ToolCommandName>convert-json-schema</ToolCommandName>
+        <PackageOutputPath>./nupkg</PackageOutputPath>
+        <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
+        <Description>Json schema version convertion utility</Description>
+        <Authors>Deimdal</Authors>
+        <PackageReadmeFile>README.md</PackageReadmeFile>
+
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Newtonsoft.Json.Schema" Version="4.0.1"/>
+        <PackageReference Include="System.CommandLine" Version="2.0.0-beta4.22272.1"/>
+        <None Include="README.md" Pack="true" PackagePath="\"/>
+    </ItemGroup>
+
+</Project>
