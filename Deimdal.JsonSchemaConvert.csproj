@@ -4,7 +4,7 @@
         <OutputType>Exe</OutputType>
         <TargetFramework>net8.0</TargetFramework>
         <Nullable>enable</Nullable>
-        <Version>1.0.2</Version>
+        <Version>1.0.3</Version>
         <AssemblyName>Deimdal.JsonSchemaConvert</AssemblyName>
         <RootNamespace>Deimdal.JsonSchemaConvert</RootNamespace>
         <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
@@ -14,6 +14,8 @@
         <PackageOutputPath>./nupkg</PackageOutputPath>
         <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
         <Description>Json schema version convertion utility</Description>
+        <RepositoryUrl>https://github.com/deimdal/json-schema-convert</RepositoryUrl>
+        <RepositoryType>git</RepositoryType>
         <Authors>Deimdal</Authors>
         <PackageReadmeFile>README.md</PackageReadmeFile>
 
