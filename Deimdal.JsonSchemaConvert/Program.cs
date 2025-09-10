@@ -1,5 +1,6 @@
 ﻿using System;
 using System.CommandLine;
+using System.CommandLine.Help;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
@@ -13,45 +14,49 @@ internal static class Program
     {
         const SchemaVersion defaultVersion = SchemaVersion.Draft2019_09;
 
-        var sourceOption = new Option<string>(["-s", "--source"])
+        var sourceOption = new Option<string>("--source", "-s")
         {
-            IsRequired = true,
+            Required = true,
             AllowMultipleArgumentsPerToken = false,
             Description = "Source schema location (file or URL)."
         };
-        var destFileOption = new Option<FileInfo>(["-d", "--dest-file"])
+        var destFileOption = new Option<FileInfo>("--dest-file", "-d")
         {
-            IsRequired = true,
+            Required = true,
             AllowMultipleArgumentsPerToken = false,
             Description = "Destination schema file name."
         };
-        var destVersionOption = new Option<SchemaVersion>(
-            aliases: ["-v", "--dest-version"],
-            isDefault: true,
-            parseArgument: result =>
+        var destVersionOption = new Option<SchemaVersion>("--dest-version", "-v")
+        {
+            AllowMultipleArgumentsPerToken = false,
+            Description = "Destination schema version.",
+            DefaultValueFactory = _ => SchemaVersion.Draft2019_09,
+            CustomParser = result =>
             {
                 if (result.Tokens.Count == 0)
                     return defaultVersion;
-
                 var argument = result.Tokens.Single().Value;
-                if (!Enum.TryParse<SchemaVersion>(argument, out var schemaVersion))
-                    throw new FormatException($"Invalid schema version param: {argument}");
-                return schemaVersion;
-            })
-        {
-            AllowMultipleArgumentsPerToken = false,
-            Description = $"Destination schema version.",
+                return !Enum.TryParse<SchemaVersion>(argument, out var schemaVersion)
+                    ? throw new FormatException($"Invalid schema version param: {argument}")
+                    : schemaVersion;
+            }
         };
 
         var rootCommand = new Command("convert-json-schema", "Json schema version conversion utility")
         {
             sourceOption,
             destFileOption,
-            destVersionOption
+            destVersionOption,
+            new HelpOption(),
+            new VersionOption()
         };
 
-        rootCommand.SetHandler(Converter.ConvertSchema, sourceOption, destFileOption, destVersionOption);
+        rootCommand.SetAction((parseResult, _) => Converter.ConvertSchema(
+            parseResult.GetRequiredValue(sourceOption),
+            parseResult.GetRequiredValue(destFileOption),
+            parseResult.GetValue(destVersionOption)));
 
-        return await rootCommand.InvokeAsync(args);
+        var parseResult = rootCommand.Parse(args);
+        return await parseResult.InvokeAsync();
     }
 }
