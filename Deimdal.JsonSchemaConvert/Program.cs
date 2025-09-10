@@ -10,7 +10,7 @@ namespace Deimdal.JsonSchemaConvert;
 
 internal static class Program
 {
-    public static async Task<int> Main(string[] args)
+    public static Task<int> Main(string[] args)
     {
         const SchemaVersion defaultVersion = SchemaVersion.Draft2019_09;
 
@@ -57,6 +57,6 @@ internal static class Program
             parseResult.GetValue(destVersionOption)));
 
         var parseResult = rootCommand.Parse(args);
-        return await parseResult.InvokeAsync();
+        return parseResult.InvokeAsync();
     }
 }
