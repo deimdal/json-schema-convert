@@ -2,9 +2,9 @@
 
     <PropertyGroup>
         <OutputType>Exe</OutputType>
-        <TargetFramework>net8.0</TargetFramework>
+        <TargetFrameworks>net8.0;net9.0</TargetFrameworks>
         <Nullable>enable</Nullable>
-        <Version>1.0.3</Version>
+        <Version>1.0.4</Version>
         <AssemblyName>Deimdal.JsonSchemaConvert</AssemblyName>
         <RootNamespace>Deimdal.JsonSchemaConvert</RootNamespace>
         <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
@@ -18,13 +18,14 @@
         <RepositoryType>git</RepositoryType>
         <Authors>Deimdal</Authors>
         <PackageReadmeFile>README.md</PackageReadmeFile>
+        <LangVersion>12</LangVersion>
 
     </PropertyGroup>
 
     <ItemGroup>
         <PackageReference Include="Newtonsoft.Json.Schema" Version="4.0.1"/>
         <PackageReference Include="System.CommandLine" Version="2.0.0-beta4.22272.1"/>
-        <None Include="README.md" Pack="true" PackagePath="\"/>
+        <None Include="..\README.md" Pack="true" PackagePath="\"/>
     </ItemGroup>
 
 </Project>
