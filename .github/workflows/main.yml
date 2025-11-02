@@ -11,7 +11,7 @@ env:
   TEST_PROJECT_PATH: 'Deimdal.JsonSchemaConvert.Tests/Deimdal.JsonSchemaConvert.Tests.csproj'
   PACKAGE_OUTPUT_DIRECTORY: ${{ github.workspace }}/nupkgout
   NUGET_SOURCE_URL: 'https://api.nuget.org/v3/index.json'
-  DOTNET_VER: '9.x'
+  DOTNET_VER: '10.x'
 
 jobs:
   build:
@@ -49,9 +49,9 @@ jobs:
     runs-on: ubuntu-latest
     if: ${{ github.event_name == 'release' }}
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v5
     - name: Setup .NET
-      uses: actions/setup-dotnet@v4
+      uses: actions/setup-dotnet@v5
       with:
         dotnet-version: ${{ env.DOTNET_VER }}
     - name: 'Download package artifact'
