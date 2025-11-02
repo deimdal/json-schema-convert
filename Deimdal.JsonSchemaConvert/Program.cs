@@ -18,18 +18,18 @@ internal static class Program
         {
             Required = true,
             AllowMultipleArgumentsPerToken = false,
-            Description = "Source schema location (file or URL)."
+            Description = "Source schema location (file or URL)"
         };
         var destFileOption = new Option<FileInfo>("--dest-file", "-d")
         {
             Required = true,
             AllowMultipleArgumentsPerToken = false,
-            Description = "Destination schema file name."
+            Description = "Destination schema file name"
         };
         var destVersionOption = new Option<SchemaVersion>("--dest-version", "-v")
         {
             AllowMultipleArgumentsPerToken = false,
-            Description = "Destination schema version.",
+            Description = "Destination schema version",
             DefaultValueFactory = _ => SchemaVersion.Draft2019_09,
             CustomParser = result =>
             {
